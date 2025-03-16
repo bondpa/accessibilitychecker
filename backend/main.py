@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pagechecker import check_wcag_accessibility
 
 app = FastAPI()
 
@@ -6,3 +7,10 @@ app = FastAPI()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@app.get("/check-webpage/")
+async def check_webpage(url: str):
+    # print(url)
+    # url = 'https://www.w3.org/WAI/demos/bad/before/home.html'
+    issues = check_wcag_accessibility(url)
+    return {"message": "Checking webpage for accessibility issues", "url": url, "issues": issues}
