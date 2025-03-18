@@ -8,7 +8,7 @@ const AccessibilityCard = ({ url }) => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`https://localhost/check-webpage/?url=${url}`);
+            const response = await fetch(`http://localhost:3300/check-webpage/?url=${url}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
