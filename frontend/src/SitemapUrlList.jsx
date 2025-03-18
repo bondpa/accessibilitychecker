@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AccessibilityCard from './AccessibilityCard';
 
 function SitemapUrlList() {
     const [sitemapUrl, setSitemapUrl] = useState('');
@@ -43,7 +44,7 @@ function SitemapUrlList() {
                 <ul>
                     {urls.map((url, index) => (
                         <li key={index}>
-                            <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+                            <AccessibilityCard url={url} />
                         </li>
                     ))}
                 </ul>
@@ -53,3 +54,5 @@ function SitemapUrlList() {
 }
 
 export default SitemapUrlList;
+
+//                            <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
