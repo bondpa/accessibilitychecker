@@ -13,7 +13,7 @@ const AccessibilityCard = ({ url }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log("Data from API:", data); // Add this line
+            console.log("Data from API:", data);
             setAccessibilityData(data);
             setError(null);
         } catch (e) {
@@ -46,6 +46,34 @@ const AccessibilityCard = ({ url }) => {
                         {node.target && node.target.length > 0 && (
                             <p><strong>Target:</strong> {node.target.join(', ')}</p>
                         )}
+
+                        {/* Related Nodes - NEW SECTION */}
+                        {node.any && node.any.length > 0 && (
+                            (() => { //Immediately Invoked Function Expression (IIFE)
+                                const hasRelatedNodes = node.any.some(anyNode => anyNode.relatedNodes && anyNode.relatedNodes.length > 0);
+                                if (!hasRelatedNodes) {
+                                    return null; // Don't render anything if no related nodes
+                                }
+
+                                return (
+                                    <div>
+                                        <h5>Related Nodes:</h5>
+                                        {node.any.map((anyNode, anyIndex) => (
+                                            anyNode.relatedNodes && anyNode.relatedNodes.length > 0 ? (
+                                                anyNode.relatedNodes.map((relatedNode, relatedIndex) => (
+                                                    <div key={relatedIndex} style={{ marginLeft: '20px', marginBottom: '5px', border: '1px solid #ddd', padding: '5px' }}>
+                                                        <p><strong>Related HTML:</strong><br /><pre>{relatedNode.html}</pre></p>
+                                                        {relatedNode.target && relatedNode.target.length > 0 && (
+                                                            <p><strong>Related Target:</strong> {relatedNode.target.join(', ')}</p>
+                                                        )}
+                                                    </div>
+                                                ))
+                                            ) : null
+                                        ))}
+                                    </div>
+                                );
+                            })()
+                        )}
                     </div>
                 ))}
             </div>
@@ -58,12 +86,10 @@ const AccessibilityCard = ({ url }) => {
                 {url}
             </a>
             {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-            {accessibilityData && ( // Remove the length check here
+            {accessibilityData && (
                 <div>
-                    {/*<h2>{accessibilityData.message}</h2> This line is removed because the message is no longer at the top level */}
-                    {/*<h3>Issues for: <a href={accessibilityData.url} target="_blank" rel="noopener noreferrer">{accessibilityData.url}</a></h3> This line is removed because the URL is no longer at the top level */}
                     {console.log("AccessibilityData.issues being passed:", accessibilityData.issues)}
-                    {renderIssueDetails(accessibilityData.issues)} {/* Access the issues array */}
+                    {renderIssueDetails(accessibilityData.issues)}
                 </div>
             )}
         </div>
