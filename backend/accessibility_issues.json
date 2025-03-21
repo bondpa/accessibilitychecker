@@ -1,0 +1,120 @@
+{
+    "message": "Checking webpage for accessibility issues",
+    "url": "http://ovning.prodwebb8.lu.se/att-skapa-en-tillganglig-webbplats",
+    "issues": [
+        {
+            "description": "Ensures the order of headings is semantically correct",
+            "help": "Heading levels should only increase by one",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/3.1/heading-order?application=axeAPI",
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": [
+                {
+                    "all": [],
+                    "any": [
+                        {
+                            "data": 3,
+                            "id": "heading-order",
+                            "impact": "moderate",
+                            "message": "Heading order invalid",
+                            "relatedNodes": []
+                        }
+                    ],
+                    "failureSummary": "Fix any of the following:\n  Heading order invalid",
+                    "html": "<h3><span dir=\"ltr\">Vanliga fel</span></h3>",
+                    "impact": "moderate",
+                    "none": [],
+                    "target": [
+                        "h3"
+                    ]
+                },
+                {
+                    "all": [],
+                    "any": [
+                        {
+                            "data": 4,
+                            "id": "heading-order",
+                            "impact": "moderate",
+                            "message": "Heading order invalid",
+                            "relatedNodes": []
+                        }
+                    ],
+                    "failureSummary": "Fix any of the following:\n  Heading order invalid",
+                    "html": "<h4><span dir=\"ltr\">Referenser</span></h4>",
+                    "impact": "moderate",
+                    "none": [],
+                    "target": [
+                        "h4"
+                    ]
+                }
+            ],
+            "tags": [
+                "cat.semantics",
+                "best-practice"
+            ]
+        },
+        {
+            "description": "Ensures all page content is contained by landmarks",
+            "help": "All page content must be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/3.1/region?application=axeAPI",
+            "id": "region",
+            "impact": "moderate",
+            "nodes": [
+                {
+                    "all": [],
+                    "any": [
+                        {
+                            "data": null,
+                            "id": "region",
+                            "impact": "moderate",
+                            "message": "Some page content is not contained by landmarks",
+                            "relatedNodes": [
+                                {
+                                    "html": "<p>Den här webbplatsen använder cookies för att förbättra användarupplevelsen. Genom att fortsätta använda webbplatsen samtycker du till att cookies används enligt vår <a class=\"alert-link\" href=\"https://www.lu.se/start/om-webbplatsen/om-kakor-cookies\">cookie-policy</a>.</p>",
+                                    "target": [
+                                        "#popup-text > p"
+                                    ]
+                                },
+                                {
+                                    "html": "<button type=\"button\" class=\"btn cookie__btn--ok dark me-2 agree-button eu-cookie-compliance-default-button\">Jag förstår</button>",
+                                    "target": [
+                                        ".cookie__btn--ok"
+                                    ]
+                                },
+                                {
+                                    "html": "<button type=\"button\" class=\"btn border border-primary cookie__btn--no decline-button eu-cookie-compliance-secondary-button\">Nej tack</button>",
+                                    "target": [
+                                        ".border"
+                                    ]
+                                },
+                                {
+                                    "html": "<div class=\"border-top pt-3 pb-4 byline ldc-no-index\">\n        2024-03-19\n  </div>",
+                                    "target": [
+                                        ".border-top"
+                                    ]
+                                },
+                                {
+                                    "html": "<button class=\"btn px-2\" type=\"button\" id=\"btn--back-to-top\">\n        \n\n\n\n\n<i class=\"fas fa-2x align-middle me-2 fa-chevron-circle-up\"></i>\n    <span>\n      Hela vägen upp\n    </span>\n  </button>",
+                                    "target": [
+                                        "#btn--back-to-top"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+                    "html": "<html lang=\"sv\" dir=\"ltr\" prefix=\"og: https://ogp.me/ns#\" class=\" js\">",
+                    "impact": "moderate",
+                    "none": [],
+                    "target": [
+                        "html"
+                    ]
+                }
+            ],
+            "tags": [
+                "cat.keyboard",
+                "best-practice"
+            ]
+        }
+    ]
+}

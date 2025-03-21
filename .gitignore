@@ -1,3 +1,4 @@
 venv/
 backend/chromedriver
 backend/__pycache__/
+backend/images/
