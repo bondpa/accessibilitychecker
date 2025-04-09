@@ -1,18 +1,21 @@
 import json
 import os
 from playwright.sync_api import sync_playwright
-from PIL import Image  # Import the Pillow library for image manipulation
+from PIL import Image, ImageDraw  # Import the Pillow library for image manipulation
 import time
 
-def create_images_from_accessibility_json(json_file, output_dir="images", padding=100):
+def create_images_from_accessibility_json(json_file, output_dir="images", padding=100, border_width=5, border_color="red"):
     """
     Parses a JSON file containing accessibility issues, extracts related HTML,
-    and creates larger, contextualized image files using Playwright.
+    and creates larger, contextualized image files using Playwright,
+    with a red border around the element with the accessibility issue.
 
     Args:
         json_file (str): Path to the JSON file.
         output_dir (str): Directory to save the generated images.
         padding (int): Padding around the element in pixels for the screenshot.
+        border_width (int): Width of the red border in pixels.
+        border_color (str): Color of the border (e.g., "red", "blue", "#FF0000").
     """
 
     try:
@@ -90,6 +93,15 @@ def create_images_from_accessibility_json(json_file, output_dir="images", paddin
                                     # Crop the image to the calculated region
                                     cropped_image = full_screenshot.crop((left, top, right, bottom))
 
+                                    # Draw a red border around the element
+                                    draw = ImageDraw.Draw(cropped_image)
+                                    element_left = int(bounding_box['x']) - left
+                                    element_top = int(bounding_box['y']) - top
+                                    element_right = element_left + int(bounding_box['width'])
+                                    element_bottom = element_top + int(bounding_box['height'])
+                                    draw.rectangle((element_left, element_top, element_right, element_bottom), outline=border_color, width=border_width)
+
+
                                     # Save the cropped image
                                     cropped_screenshot_path = os.path.join(output_dir, f"issue_{issue_count}.png")
                                     cropped_image.save(cropped_screenshot_path)
@@ -112,5 +124,4 @@ def create_images_from_accessibility_json(json_file, output_dir="images", paddin
 
 # Example usage:
 if __name__ == "__main__":
-    print("running")
-    create_images_from_accessibility_json("accessibility_issues.json", "images", padding=100)
+    create_images_from_accessibility_json("accessibility_issues.json", "images", padding=100, border_width=5, border_color="red")
