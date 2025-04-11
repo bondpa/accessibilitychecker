@@ -58,3 +58,9 @@ def fetch_accessibility_issues_with_tags(url):
     df = df.drop(columns=['tags'])
     
     return df
+
+if __name__ == "__main__":
+    url = 'https://www.w3.org/WAI/demos/bad/before/home.html'
+    df = fetch_accessibility_issues_with_tags(url)
+    print(df.head())  # Display the first few rows of the DataFrame
+    df.to_csv('accessibility_issues.csv', index=False)  # Save to CSV if needed
